@@ -16,6 +16,11 @@ public class Util {
       printArray(Arrays.stream(array).boxed().toArray());
    }
 
+   public static void printArray(int[][] array) {
+      System.out.println(Arrays.stream(array).map(arr -> Arrays.stream(arr).boxed().collect(Collectors.toList()))
+            .collect(Collectors.toList()));
+   }
+
    public static class ListNode {
       public int val;
       public ListNode next;
