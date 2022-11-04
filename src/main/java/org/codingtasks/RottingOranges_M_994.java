@@ -59,29 +59,23 @@ public class RottingOranges_M_994 {
       Queue<Node> queue = new LinkedList<>();
       Set<Node> visited = new HashSet<>();
 
+      int orangeCount = 0;
+
       for (int r = 0; r < grid.length; r++) {
          for (int c = 0; c < grid[r].length; c++) {
             if (grid[r][c] == 2) {
                Node node = new Node(r, c);
                queue.add(node);
                visited.add(node);
+               orangeCount++;
+            } else if (grid[r][c] == 1) {
+               orangeCount++;
             }
          }
       }
 
       int mins = bfs(grid, queue, visited);
-
-      for (int r = 0; r < grid.length; r++) {
-         for (int c = 0; c < grid[r].length; c++) {
-            if (grid[r][c] == 1) {
-               Node node = new Node(r, c);
-               if (!visited.contains(node)) {
-                  return -1;
-               }
-            }
-         }
-      }
-      return mins;
+      return visited.size() == orangeCount ? mins : -1;
    }
 
    private int bfs(int[][] grid, Queue<Node> queue, Set<Node> visited) {
